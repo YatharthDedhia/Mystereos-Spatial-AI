@@ -1,5 +1,4 @@
-# Mystereos-Spatial-AI
-
+## **Installation:**
 ### 1. Create conda environment:
 ```
 conda create -n mystereos
@@ -47,3 +46,5 @@ cd Mirrornet
 
     cd GDNet
     python main.py
+
+---
