@@ -30,7 +30,7 @@ to_pil = transforms.ToPILImage()
 def mirror(frame):
     net = MirrorNet()
 
-    net.load_state_dict(torch.load("../Models/160.pth"))
+    net.load_state_dict(torch.load("../../Models/160.pth"))
 
     net.eval()
     # dummy_input = dummy_input = torch.randn(1, 3, 224, 224)
