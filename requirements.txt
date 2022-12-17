@@ -1,0 +1,9 @@
+git+https://github.com/lucasb-eyer/pydensecrf.git
+Cython
+tensorboardX==1.4
+xlwt
+tqdm
+blobconverter
+depthai
+opencv-python
+scikit-learn
