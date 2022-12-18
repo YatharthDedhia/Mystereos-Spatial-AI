@@ -92,26 +92,49 @@ cd Mirrornet
 
 ## **MiDaS Monocular Depth Estimation:**
 
-**FPS:** ~13-14 FPS
+**FPS:** 13-14 FPS on OAK-D Pro
+![Midas Output](Assets/error.png)
+Flase Depth is being calculated for the virtual background on the laptop screen.
 
-![MiDaS results](Assets/midas_results.gif)
+---
 
-## **MirrorNet**
-**FPS:** ~2 FPS on OAK-D Pro
+![MiDaS results](Assets/midas.gif)
+The above video shows accurate depth estimation on non reflective surfaces, but incorrect depth on reflective surfaces (mirror), as the person is clearly visible in the depth map of the mirror, which should ideally be a flat surface.
 
-![MirrorNet Results](Assets/mirrornet_results)
-
-## **GDNet**
-**FPS:** ~2 FPS on OAK-D Pro
-
- ![GDNet Results](Assets/gdnet_results)
+---
 
 ## **MiDaS and MirrorNet Masking**
 **FPS:** ~1 FPS
+![Mirrornet](Assets/MirrorNet1.png)
+![Mirrornet](Assets/MirrorNet2.png)
+**Leftmost image**: RGB image
 
-![MirrorNet Masking Results](Assets/mirrornet_masking_results)
+**2nd from left image**: inaccurate depth map for lambertian surfaces
 
+**3rd from left image:** mask created by mirrornet for reflective surface detected 
+
+**Rightmost image:** Depth Map output after applying mask and post processing
+
+---
+![MirrorNet Masking Results](Assets/mirrornet.gif)
+The above video shows that the model accurately removes the false depth from the mirror, tho the FPS takes a significant hit.
+
+---
 ## **MiDaS and GDNet Masking**
 **FPS:** ~1 FPS
+![Mirrornet](Assets/MirrorNet3.png)
+**Leftmost image**: RGB image
 
-![GDNet Masking Results](Assets/gdnet_masking_results)
+**2nd from left image**: inaccurate depth map for lambertian surfaces
+
+**3rd from left image:** mask created by mirrornet for reflective surface detected 
+
+**Rightmost image:** Depth Map output after applying mask and post processing
+
+---
+![GDNet Masking Results](Assets/gdnet.gif)
+The above video shows that the model accurately removes the false depth from the mirror, but also creates false depth maps in the absence of a mirror. 
+
+---
+
+# Ackowledgement
