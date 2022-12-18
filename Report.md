@@ -6,17 +6,21 @@
 
 
 # **Aim:** 
-The aim of our project is to improve the depth estimation of Oak-D Pro and othe similar camera systems by solving some major problems including **occlusions**, improving depth estimation of **mirror surfaces** and **Long Range Depth Estimation** using stereo and monocular depth estimation techniques.
+The aim of our project is to improve the depth estimation of Oak-D Pro and other similar camera systems by solving some major problems including **occlusions**, improving depth estimation of **mirror surfaces** and **Long Range Depth Estimation** using stereo and monocular depth estimation techniques.
 
 ---
 
 > # Occlusion
 ### **Theory:**
-Use of [Occlusion Aware Depth Maps](https://paperswithcode.com/paper/learning-occlusion-aware-coarse-to-fine-depth) trained using a combination of stereo and monocular vision.
-MonoDepth
+To solve the problem of Occlusion we based our proposal on  [Occlusion Aware Depth Maps](https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Revealing_the_Reciprocal_Relations_Between_Self-Supervised_Stereo_and_Monocular_Depth_ICCV_2021_paper.pdf) paper. Here as we can see , we need to generate a depth map using both the stereo camera and the monocular camera. 
 
 ### **Workflow**
-We explored the various pretrained models like [OCFDnet](https://arxiv.org/abs/2203.10925) and [MonoDepth2](https://arxiv.org/abs/1806.01260), but were unable to extract suitable results on the OAK-D Pro camera.
+
+We tried using the Monodepth2 Neural Network model to generate a depth map from the monocular camera using deep learning but were not satisfied with the results. 
+Hence we settled on the SOTA pretrained Midas model. Then inorder to generate a deep learning based Depth map from the stereo images , we used the pretrained Stereonet and succesfully were able to generate the Occlusion mask and the depth map. Next we tried out the Occlusion Aware fusion of all the three maps generated
+i.e. the two depth maps from the stereo and mono camera respectively and the occlusion mask but were unable to render a satisfactory depth map without hugely compromising its quality.
+
+Next We explored the various pretrained models like [OCFDnet](https://arxiv.org/abs/2203.10925) and [MonoDepth2](https://arxiv.org/abs/1806.01260), but were unable to extract suitable results on the OAK-D Pro camera.
 
 ### **Conclusion**
 The IR Dot Projection System on the OAK-D Pro is used to solve the problem of occulsion to some extent.
