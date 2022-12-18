@@ -3,5 +3,8 @@
 *.xml
 *.onnx
 *.pth
+*.zip
 Models
 __pycache__
+Occlusion
+CRD_Fusion
