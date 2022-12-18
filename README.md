@@ -69,15 +69,17 @@ pip install blobconverter
 pip install depthai
 pip install opencv-python -->
 
-```
-cd Mirrornet
-```
+### 3. Download Model files from [here](https://drive.google.com/file/d/1UnIaeM93dVn-vsykh7cbl0ByQr9Dy37j/view?usp=sharing) and extract it in the parent directory as Mystereos-Spatial-AI/Models
 
 ## A New approach
 
 Oak-D pro camera treats the problem of Depth estimation as a StereoVision problem. StereoVision comes with its own drawbacks a major one being the problem of Occlusion and the problem of Incorrect depth estimation in case of mirror scene. Hence we propose to run a neural network model that generates superior quality depth maps namely MiDas. Having been trained on multiple datasets like ReDWeb, DIML, Movies, MegaDepth, WSVD abd IRS, this approach clearly outperforms competing methods across diverse datasets, setting a new state of the art for monocular depth estimation. The experiments confirm that mixing data from complementary sources greatly improves monocular depth estimation.
 
 ### Run only MiDaS depth model 12 FPS
+
+```
+cd Mirrornet
+```
 
     python MiDaS.py
 
@@ -88,6 +90,10 @@ Oak-D pro camera treats the problem of Depth estimation as a StereoVision proble
 Existing computer vision systems do not consider lambertian surfaces such as mirrors, and may get confused by the reflected content inside a mirror and hence we get the depth of objects reflected inside the mirror while using the Oak-D camera. The RGB input images from the camera are passed to Mirror Detection Networks- MirrorNet and GDNet and we use opencv techniques on the resultant images obtained a superior depth estimation. 
 
 ### Run Mirrornet masking on OAK-D 2 FPS
+
+```
+cd Mirrornet
+```
 
     mirrornet_OAK-D.py 
 
