@@ -35,6 +35,8 @@ https://github.com/PINTO0309/PINTO_model_zoo/blob/main/149_depth_estimation
 #     NN_PATH = blobconverter.from_zoo(name="depth_estimation_mbnv2_480x640", zoo_type="depthai", shaves=6)
 
 NN_WIDTH, NN_HEIGHT = 256, 256
+NN_PATH = blobconverter.from_openvino(
+    "../Models/MiDaS_small.xml", "../Models/MiDaS_small.bin", shaves=6)
 
 # --------------- Pipeline ---------------
 # Start defining a pipeline
@@ -43,7 +45,8 @@ pipeline.setOpenVINOVersion(version=dai.OpenVINO.VERSION_2021_4)
 
 # Define a neural network
 detection_nn = pipeline.create(dai.node.NeuralNetwork)
-detection_nn.setBlobPath("../Models/blob/MiDaS_small.blob")
+# detection_nn.setBlobPath("../Models/blob/MiDaS_small.blob")
+detection_nn.setBlobPath(str(NN_PATH))
 detection_nn.setNumPoolFrames(4)
 detection_nn.input.setBlocking(False)
 detection_nn.setNumInferenceThreads(2)
@@ -53,7 +56,7 @@ cam = pipeline.create(dai.node.ColorCamera)
 cam.setPreviewSize(NN_WIDTH, NN_HEIGHT)
 cam.setInterleaved(False)
 cam.setFps(60)
-cam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_720_P)
+cam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
 
 # Create outputs
 xout_cam = pipeline.create(dai.node.XLinkOut)
@@ -87,7 +90,8 @@ with dai.Device(pipeline) as device:
         frame = in_frame.getCvFrame()
 
         # Get output layer
-        pred = np.array(in_nn.getFirstLayerFp16()).reshape((NN_HEIGHT, NN_WIDTH))
+        pred = np.array(in_nn.getFirstLayerFp16()).reshape(
+            (NN_HEIGHT, NN_WIDTH))
 
         # Scale depth to get relative depth
         d_min = np.min(pred)
@@ -97,24 +101,25 @@ with dai.Device(pipeline) as device:
         # Color it
         depth_relative = np.array(depth_relative) * 255
         depth_relative = depth_relative.astype(np.uint8)
-        depth_relative = cv2.applyColorMap(depth_relative, cv2.COLORMAP_INFERNO)
-
-        # Downscale frame
-        frame = cv2.resize(frame, (NN_WIDTH//2, NN_HEIGHT//2))
+        depth_relative = cv2.applyColorMap(
+            depth_relative, cv2.COLORMAP_INFERNO)
 
         # Show FPS
         color_black, color_white = (0, 0, 0), (255, 255, 255)
         label_fps = "Fps: {:.2f}".format(fps)
         (w1, h1), _ = cv2.getTextSize(label_fps, cv2.FONT_HERSHEY_TRIPLEX, 0.4, 1)
-        cv2.rectangle(frame, (0, frame.shape[0] - h1 - 6), (w1 + 2, frame.shape[0]), color_white, -1)
-        cv2.putText(frame, label_fps, (2, frame.shape[0] - 4), cv2.FONT_HERSHEY_TRIPLEX,0.4, color_black)
+        cv2.rectangle(
+            frame, (0, frame.shape[0] - h1 - 6), (w1 + 2, frame.shape[0]), color_white, -1)
+        cv2.putText(frame, label_fps, (2,
+                    frame.shape[0] - 4), cv2.FONT_HERSHEY_TRIPLEX, 0.4, color_black)
 
-        # Concatenate NN input and produced depth
-        # cv2.namedWindow("Resized_Window", cv2.WINDOW_NORMAL)
-        # cv2.resizeWindow("Resized_Window", 300, 700)
-        cv2.imshow("test", depth_relative)
-        # cv2.imshow("Detections", cv2.hconcat(depth_relative,frame))
+        # Display Output
+        Hori = np.concatenate((frame, depth_relative), axis=1)
+        cv2.namedWindow("Detections", cv2.WINDOW_NORMAL)
+        cv2.resizeWindow("Detections", 1000, 500)
+        cv2.imshow("Detections", Hori)
 
+        # Calculate FPS
         counter += 1
         if (time.time() - start_time) > 1:
             fps = counter / (time.time() - start_time)

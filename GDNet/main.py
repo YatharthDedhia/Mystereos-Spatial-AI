@@ -100,10 +100,12 @@ with dai.Device(pipeline) as device:
 
         # Extract palette
         inpaint = cv2.inpaint(final, inv_inv_frame , 10, flags=cv2.INPAINT_NS)
-        output = cv2.GaussianBlur(inpaint,(5,5),0)
+        # output = cv2.GaussianBlur(inpaint,(5,5),0)
         # cv2.imshow("sub", sub)
 
-        Hori = np.concatenate((depth_relative, backtorgb, final,inpaint,output), axis=1)
+        Hori = np.concatenate((frame1,inpaint), axis=1)
+        cv2.namedWindow("Detections", cv2.WINDOW_NORMAL)
+        cv2.resizeWindow("Detections", 1000, 500)
         cv2.imshow("Detections", Hori)
 
         # Count FPS

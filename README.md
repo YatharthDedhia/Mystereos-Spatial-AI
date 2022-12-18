@@ -1,4 +1,7 @@
-## **Installation:**
+# File Structure:
+
+
+# Installation:
 ### 1. Create conda environment:
 ```
 conda create -n mystereos
@@ -19,7 +22,7 @@ pip install blobconverter
 pip install depthai
 pip install opencv-python -->
 
-# Mirrornet:
+## **MirrorNet**:
 ```
 cd Mirrornet
 ```
@@ -41,10 +44,38 @@ cd Mirrornet
     cd MirrorNet\ Midas/
     python infer_local.py
 
-# GDNet
+## **GDNet**
 ### Run MiDaS on OAK-D and GDNet locally simultaneously
 
     cd GDNet
     python main.py
 
 ---
+
+# Results:
+
+## **MiDaS Monocular Depth Estimation:**
+
+**FPS:** ~13-14 FPS
+
+![MiDaS results](Assets/midas_results.gif)
+
+## **MirrorNet**
+**FPS:** ~2 FPS on OAK-D Pro
+
+![MirrorNet Results](Assets/mirrornet_results)
+
+## **GDNet**
+**FPS:** ~2 FPS on OAK-D Pro
+
+ ![GDNet Results](Assets/gdnet_results)
+
+## **MiDaS and MirrorNet Masking**
+**FPS:** ~1 FPS
+
+![MirrorNet Masking Results](Assets/mirrornet_masking_results)
+
+## **MiDaS and GDNet Masking**
+**FPS:** ~1 FPS
+
+![GDNet Masking Results](Assets/gdnet_masking_results)
