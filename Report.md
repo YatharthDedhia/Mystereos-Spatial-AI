@@ -1,43 +1,7 @@
 # Mystereos-Spatial-AI
 
 ## Table Of Contents:
-```
-├── Assets
-├── GDNet
-│   ├── backbone
-│   ├── config.py
-│   ├── dataset.py
-│   ├── gdnet.py
-│   ├── infer.py
-│   ├── main.py
-│   ├── misc.py
-│   └── README.md
-├── Mirrornet
-│   ├── MiDaS.py
-│   ├── MirrorNet Midas
-│   │   ├── backbone
-│   │   ├── config.py
-│   │   ├── dataset.py
-│   │   ├── infer_local.py
-│   │   ├── infer.py
-│   │   ├── main.py
-│   │   ├── mirrornet.py
-│   │   ├── misc.py
-│   │   ├── README.md
-│   │   └── utils
-│   └── mirrornet_oakd.py
-├── Models
-│   ├── 160.pth
-│   ├── 200.pth
-│   ├── blob
-│   ├── MiDaS_small.bin
-│   ├── MiDaS_small.xml
-│   ├── nyu_rawdata.pth
-│   └── onnx
-├── README.md
-├── Report.md
-└── requirements.txt
-```
+
 ---
 
 
