@@ -52,12 +52,9 @@ python3 -m pip list | grep depthai
 
 conda install pytorch torchvision torchaudio cpuonly -c pytorch
 ```
-<!-- pip install git+https://github.com/lucasb-eyer/pydensecrf.git
-pip3 install -U scikit-learn
-pip install blobconverter
-pip install depthai
-pip install opencv-python -->
 
+### 3. Download Model files from [here](https://drive.google.com/file/d/1UnIaeM93dVn-vsykh7cbl0ByQr9Dy37j/view?usp=sharing) and extract it in the parent directory as Mystereos-Spatial-AI/Models
+---
 ## **MirrorNet**:
 ```
 cd Mirrornet
